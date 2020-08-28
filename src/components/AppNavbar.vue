@@ -1,16 +1,16 @@
 <template>
   <div class="bg-dark mb-5">
-      <nav class="navbar navbar-expand-lg navbar-dark pt-3 pb-3 container mr-auto">
+      <nav class="navbar navbar-expand-lg navbar-dark pt-3 pb-3 container">
         <div class="navbarNav ml-auto">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav text-uppercase">
             <li class="">
-              <router-link class="nav-link" to="/">Home</router-link>
+              <router-link class="style-link" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/admin">Admin</router-link>
+              <router-link class="style-link" to="/admin">Admin</router-link>
             </li>
             <li v-if="currentUser">
-              <a class="nav-link" @click.prevent="logout" href="#">Salir</a>
+              <a class="style-link" @click.prevent="logout" href="#">Salir</a>
             </li>
           </ul>
         </div>
@@ -39,4 +39,15 @@ export default {
 </script>
 
 <style>
+.style-link {
+  display: block;
+  padding: .5rem 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.style-link:hover {
+  color: rgb(0, 169, 199);
+  text-decoration: none;
+}
 </style>

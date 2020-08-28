@@ -10,7 +10,7 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/admin',
@@ -19,6 +19,11 @@ Vue.use(VueRouter)
     meta: {
       login: true
     }
+  },
+  {
+    path: '/*',
+    name: 'NotFound',
+    redirect: '/'
   }
 ]
 
