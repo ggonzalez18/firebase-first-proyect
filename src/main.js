@@ -9,8 +9,14 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+let app
+firebase.auth().onAuthStateChanged(() => { // no se pierden las credenciales de usuario al hacer refresh
+  if (!app) {
+    app =
+    new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+})
