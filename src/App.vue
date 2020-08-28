@@ -1,14 +1,20 @@
 <template>
   <div id="app">
-    <div class="bg-dark mb-5">
-      <nav class="navbar-dark pt-3 pb-3 container">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/admin">Admin</router-link>
-    </nav>
-    </div>
+    <AppNavbar/>
     <router-view/>
   </div>
 </template>
+
+<script>
+
+import AppNavbar from '@/components/AppNavbar.vue'
+
+export default {
+  components: {
+    AppNavbar
+  }
+}
+</script>
 
 <style>
 #app {
@@ -24,9 +30,4 @@
   text-decoration: none;
 } */
 
-nav a.router-link-exact-active {
-  color: #ffffff;
-  font-weight: bold;
-  text-decoration: none;
-}
 </style>

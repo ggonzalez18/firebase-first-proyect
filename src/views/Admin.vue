@@ -1,10 +1,16 @@
 <template>
-  <div class="container">Hola Soy nuevo</div>
+  <div class="container">
+    <h1>Bienvenido {{ currentUser.email}}</h1>
+  </div>
 </template>
 
 <script>
-export default {
+import {mapState} from 'vuex'
 
+export default {
+  computed: {
+    ...mapState(['currentUser'])
+  }
 }
 </script>
 

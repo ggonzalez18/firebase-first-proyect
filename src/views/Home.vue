@@ -9,7 +9,7 @@
           <label for="exampleInputPassword1">Ingresa tu contraseña</label>
           <input v-model="password" type="password" class="form-control" >
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
     </form>
   </div>
 </template>
@@ -17,6 +17,7 @@
 <script>
 // @ is an alias to /src
 import firebase from 'firebase'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -27,9 +28,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setUser']),
     login() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
+        this.setUser({
+          email: this.email
+        })
         this.$router.push('/admin')
       })
       .catch(() => {
