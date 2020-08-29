@@ -30,4 +30,12 @@ app.get('/beers/:id', async (req, res) => {
   res.send(beer)
 })
 
+//crear cervezas
+app.post('/beers', async (req, res) => {
+  const beer = await admin.firestore().collection('beers').add(req.body).then((doc) => {
+    return doc.id
+  })
+  res.send(beer)
+})
+
 exports.api = functions.https.onRequest(app)

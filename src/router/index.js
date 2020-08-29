@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
 import firebase from 'firebase'
+import Beer from '@/components/Beer.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,14 @@ Vue.use(VueRouter)
     path: '/admin',
     name: 'Admin',
     component: Admin,
+    meta: {
+      login: true
+    }
+    },
+  {
+    path: '/beers/:id',
+    name: 'Beer',
+    component: Beer,
     meta: {
       login: true
     }
