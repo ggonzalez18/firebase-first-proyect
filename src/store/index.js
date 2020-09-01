@@ -30,9 +30,19 @@ export default new Vuex.Store({
         commit('SET_BEERS', response.data)
       })
     },
-    setBeer({ commit }, id) {
+    setBeer({ commit }, id) { //commit llama a mutaciones
       Axios.get(`https://us-central1-myfirstproyect-8aa5b.cloudfunctions.net/api/beers/${id}`).then((response) => {
         commit('SET_BEER', response.data)
+      })
+    },
+    submitBeer({ dispatch }, beer) { //dispach llama a otras acciones
+      Axios.post('https://us-central1-myfirstproyect-8aa5b.cloudfunctions.net/api/beers', beer).then(() => {
+        dispatch('setBeers')
+      })
+    },
+    deleteBeer({ dispatch }, id) {
+      Axios.delete(`https://us-central1-myfirstproyect-8aa5b.cloudfunctions.net/api/beers/${id}`).then(() => {
+        dispatch('setBeers')
       })
     }
   },

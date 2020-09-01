@@ -38,4 +38,10 @@ app.post('/beers', async (req, res) => {
   res.send(beer)
 })
 
+//elimina cervezas
+app.delete('/beers/:id', async (req, res) => {
+  const beer = await admin.firestore().collection('beers').doc(req.params.id).delete()
+  res.send(beer)
+})
+
 exports.api = functions.https.onRequest(app)

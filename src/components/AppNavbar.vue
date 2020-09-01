@@ -4,7 +4,7 @@
         <div class="navbarNav ml-auto">
           <ul class="navbar-nav text-uppercase">
             <li class="">
-              <router-link class="style-link" to="/">Home</router-link>
+              <router-link class="style-link" to="/" v-if="!currentUser">Home</router-link>
             </li>
             <li class="nav-item">
               <router-link class="style-link" to="/admin">Admin</router-link>
