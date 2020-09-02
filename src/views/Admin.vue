@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="mb-4">Bienvenido {{ currentUser.email}}</h1>
-      <form-component></form-component>
+      <form-component :currentBeer="currentBeer"></form-component>
       <section v-for="beer in beers" :key="beer.id">
         <div class="row">
           <div class="col-lg-8">
@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-md-6 col-lg-6">
                   <div class="card-body">
-                    <h3 class="card-title">{{beer.data.name}}</h3>
-                    <p class="card-text">Valor: $ {{beer.data.price}}</p>
+                    <h2 class="card-title">{{beer.data.name}}</h2>
+                    <h4 class="card-text">Valor: $ {{beer.data.price}}</h4>
                     <router-link :to="{name:'Beer', params:{id:beer.id}}"> Click Aquí</router-link>
                   </div>
                 </div>
@@ -22,6 +22,7 @@
           </div>
           <div class="col-lg-2">
             <button @click="deleteBeer(beer.id)" class="btn btn-info ml-2 mb-2 mt-2">Eliminar</button>
+            <button @click="setCurrentBeer(beer)" class="btn btn-success ml-2 mb-2 mt-2">Modificar</button>
           </div>
         </div>
       </section>
@@ -33,6 +34,16 @@ import {mapState, mapActions} from 'vuex'
 import FormComponent from '../components/FormComponent'
 
 export default {
+  data() {
+    return {
+      currentBeer: {
+        name: '',
+        price: 0,
+        picture: '',
+        id: undefined
+      }
+    }
+  },
   components: {
     FormComponent
   },
@@ -40,7 +51,10 @@ export default {
     ...mapState(['currentUser', 'beers'])
   },
   methods: {
-    ...mapActions(['setBeers', 'deleteBeer'])
+    ...mapActions(['setBeers', 'deleteBeer']),
+    setCurrentBeer(beer) {
+      this.currentBeer = beer.data
+    }
   },
   created() {
     this.setBeers()

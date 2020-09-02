@@ -16,6 +16,7 @@ app.get('/beers', async (req, rest) => {
   rest.send(list)
 })
 
+// trae las cervesas desde el firestore
 app.get('/beers/:id', async (req, res) => {
   const beer = await admin.firestore().collection('beers')
     .doc(req.params.id).get().then((doc) => {
