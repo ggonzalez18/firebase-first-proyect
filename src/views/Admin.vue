@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="mb-4">Bienvenido {{ currentUser.email}}</h1>
-      <form-component :currentBeer="currentBeer"></form-component>
+      <form-component @edit-beer='beerUpdate' :currentBeer="currentBeer"></form-component>
       <section v-for="beer in beers" :key="beer.id">
         <div class="row">
           <div class="col-lg-8">
@@ -37,9 +37,11 @@ export default {
   data() {
     return {
       currentBeer: {
-        name: '',
-        price: 0,
-        picture: '',
+        data: {
+          name: '',
+          price: 0,
+          picture: ''
+          },
         id: undefined
       }
     }
@@ -51,9 +53,23 @@ export default {
     ...mapState(['currentUser', 'beers'])
   },
   methods: {
-    ...mapActions(['setBeers', 'deleteBeer']),
+    ...mapActions(['setBeers', 'deleteBeer', 'updateBeer']),
     setCurrentBeer(beer) {
-      this.currentBeer = beer.data
+      this.currentBeer = beer
+    },
+    beerUpdate(beer) {
+      const newBeer = {
+        data: {
+          name: beer.data.name,
+          price: beer.data.price,
+          picture: beer.data.picture
+        },
+        id: beer.id
+      }
+      this.updateBeer(newBeer),
+      this.currentBeer.data.name = '',
+      this.currentBeer.data.price= 0,
+      this.currentBeer.data.picture = ''
     }
   },
   created() {

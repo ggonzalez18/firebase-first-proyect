@@ -1,19 +1,19 @@
 <template>
   <div class="=container">
-    <form @submit.prevent="createBeer">
+    <form @submit.prevent="submitForm">
   <div class="form-group">
     <label for="formGroupExampleInput">Nombre de la nueva cerveza</label>
-    <input type="text" class="form-control" v-model="currentBeer.name">
+    <input type="text" class="form-control" v-model="currentBeer.data.name">
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Precio</label>
-    <input type="number" class="form-control" v-model="currentBeer.price">
+    <input type="number" class="form-control" v-model="currentBeer.data.price">
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Link imagen</label>
-    <input type="text" class="form-control" v-model="currentBeer.picture">
+    <input type="text" class="form-control" v-model="currentBeer.data.picture">
   </div>
-  <button class="btn btn-info mb-2 mt-2">Crear</button>
+  <button class="btn btn-info mb-2 mt-2">{{currentBeer.id ? 'Editar' : 'Crear' }}</button>
 </form>
   </div>
 </template>
@@ -22,6 +22,7 @@
 import {mapActions} from 'vuex'
 
 export default {
+  name: 'form-component',
   props: {
     currentBeer: {
       type: Object,
@@ -30,19 +31,27 @@ export default {
   },
   methods: {
     ...mapActions (['submitBeer']),
+    submitForm() {
+      if (this.currentBeer.id) { //si existe editamos
+        this.$emit('edit-beer', this.currentBeer)
+      } else { // si no existe creamos una nueva cerveza
+        this.createBeer()
+      }
+      this.cleanCurrentBeer()
+    },
     createBeer() {
       const beer = {
-        name: this.name,
-        price: this.price,
-        picture: this.picture
+        name: this.currentBeer.data.name,
+        price: this.currentBeer.data.price,
+        picture: this.currentBeer.data.picture
       }
-      this.submitBeer(beer)
-      this.name = '',
-      this.price = 0,
-      this.picture = ''
+      this.submitBeer(beer) // metodo del store que hace la llamada a axiosApi
     },
-    editBeer(beer) {
-      this.$emit('edit-beer', beer)
+    cleanCurrentBeer() {
+      this.currentBeer.data.name = '',
+      this.currentBeer.data.price = 0,
+      this.currentBeer.data.picture = '',
+      this.currentBeer.id = undefined
     }
   }
 }

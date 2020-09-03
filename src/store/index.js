@@ -42,6 +42,11 @@ export default new Vuex.Store({
     },
     deleteBeer({ dispatch }, id) {
       Axios.delete(`https://us-central1-myfirstproyect-8aa5b.cloudfunctions.net/api/beers/${id}`).then(() => {
+        dispatch('setBeers') // dispach llama a las otra acciones
+      })
+    },
+    updateBeer({ dispatch }, beer) {
+      Axios.put(`https://us-central1-myfirstproyect-8aa5b.cloudfunctions.net/api/beers/${beer.id}`, beer.data).then(() => {
         dispatch('setBeers')
       })
     }
