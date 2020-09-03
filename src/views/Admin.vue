@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="mb-4">Bienvenido {{ currentUser.email}}</h1>
+    <h1 class="mb-4 welcome">Bienvenido {{ currentUser.email}}</h1>
       <form-component @edit-beer='beerUpdate' :currentBeer="currentBeer"></form-component>
       <section v-for="beer in beers" :key="beer.id">
         <div class="row">
@@ -8,13 +8,13 @@
             <div class="card mb-3" style="max-width: 800px;">
               <div class="row no-gutters">
                 <div class="col-md-4 col-lg-6">
-                  <img :src="beer.data.picture" class="card-img" alt="...">
+                  <img :src="beer.data.picture" class="card-img ml-3" alt="...">
                 </div>
                 <div class="col-md-6 col-lg-6">
                   <div class="card-body">
-                    <h2 class="card-title">{{beer.data.name}}</h2>
-                    <h4 class="card-text">Valor: $ {{beer.data.price}}</h4>
-                    <router-link :to="{name:'Beer', params:{id:beer.id}}"> Click Aquí</router-link>
+                    <h2 class="card-title title">CERVEZA <br> {{beer.data.name}}</h2>
+                    <h3 class="card-text value" >Valor: $ {{beer.data.price}}</h3>
+                    <router-link :to="{name:'Beer', params:{id:beer.id}}" class="btn btn-secondary">Ver Detalles</router-link>
                   </div>
                 </div>
               </div>
@@ -79,8 +79,18 @@ export default {
 </script>
 
 <style>
-.img {
-  background-size: cover;
-  background-position: center;
+.value {
+  font-weight: 500;
+  color: gray;
 }
+
+.title {
+  font-family: 'Anton', sans-serif;
+}
+.welcome {
+  font-family: 'Oleo Script', cursive;
+  font-size: 50px;
+  text-align: center;
+}
+
 </style>

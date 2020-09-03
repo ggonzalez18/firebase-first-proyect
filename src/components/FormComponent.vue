@@ -13,7 +13,7 @@
     <label for="formGroupExampleInput2">Link imagen</label>
     <input type="text" class="form-control" v-model="currentBeer.data.picture">
   </div>
-  <button class="btn btn-info mb-2 mt-2">{{currentBeer.id ? 'Editar' : 'Crear' }}</button>
+  <button class="btn btn-danger mb-5 mt-2">{{currentBeer.id ? 'Editar' : 'Ingresar Nueva' }}</button>
 </form>
   </div>
 </template>

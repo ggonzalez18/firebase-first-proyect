@@ -1,5 +1,6 @@
 <template>
   <div class="home container mt-3">
+    <h1 class="title mb-5">Iniciar sesión</h1>
       <form @submit.prevent='login'>
         <div class="form-group">
           <label for="exampleInputEmail1">Ingresa tu Email</label>
